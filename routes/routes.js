@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Bike = require('../models/bike');
 
-router.get('/', async (req, res) => {
-    res.json('Bienvendio a la tienda de bicis!');
-});
+// WELCOME
+    router.get('/', async (req, res) => {
+        res.json('Bienvendio a la tienda de bicis!');
+    });
 
 // GET
     router.get('/bikes/:id', async (req, res) => {
@@ -45,5 +46,15 @@ router.get('/', async (req, res) => {
         res.status(400).send(error);
         }
     }); 
+
+// DELETE
+    router.delete('/bikes/:id', async (req, res) => {
+        try {
+            const deletedBike = await Bike.findByIdAndDelete(req.params.id);
+            res.json(deletedBike);
+        } catch (err) {
+            res.status(400).json(err);
+        }
+    });
 
 module.exports = router;
