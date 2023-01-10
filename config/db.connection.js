@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect('mongodb+srv://ramonsancheez:Rjq0cz5WeXXmCGKZ@cluster0.9rfuhuh.mongodb.net/bikestore?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
