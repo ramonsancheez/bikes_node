@@ -1,0 +1,22 @@
+{
+  "name": "bikes_node",
+  "version": "1.0.0",
+  "description": "crud with an express-node api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramonsancheez/bikes_node.git"
+  },
+  "author": "Ramon Sanchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramonsancheez/bikes_node/issues"
+  },
+  "homepage": "https://github.com/ramonsancheez/bikes_node#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
