@@ -16,4 +16,21 @@ router.get('/', async (req, res) => {
         }
     });
 
+// CREATE
+    router.post('/bikes', async (req, res) => {
+        try {
+            const newBike = new Bike({
+                name: req.body.name,
+                brand: req.body.brand,
+                model: req.body.model,
+                price: req.body.price,
+                category: req.body.category
+            });
+            await newBike.save();
+            res.status(201).send(newBike);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
 module.exports = router;
