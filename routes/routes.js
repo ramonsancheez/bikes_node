@@ -8,6 +8,14 @@ const Bike = require('../models/bike');
     });
 
 // GET
+    router.get('/bikes', async (req, res) => {
+        try {
+            const bike = await Bike.find();  
+            res.json(bike);
+        } catch (err) {
+            res.status(400).json(err);
+        }
+    });
     router.get('/bikes/:id', async (req, res) => {
         try {
             const bike = await Bike.findById(req.params.id);  
