@@ -33,4 +33,17 @@ router.get('/', async (req, res) => {
         }
     });
 
+// UPDATE
+    router.put('/bikes/:id', async (req, res) => {
+        try {
+            const bike = await Bike.findByIdAndUpdate(req.params.id, {name:req.body.name}, {new: true});
+            if (!bike) {
+                return res.status(404).send();
+            }
+            res.send(bike);
+        } catch (error) {
+        res.status(400).send(error);
+        }
+    }); 
+
 module.exports = router;
