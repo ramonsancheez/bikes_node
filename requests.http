@@ -3,22 +3,25 @@ POST http://localhost:3000/bikes/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Roberto",
-    "brand": "BMC",
-    "model": "electric bike",
-    "price": 599,
-    "category": "premium",
-    "store": "63bed9e70c0fe97ca71a6f06"
+    "name": "Maria",
+    "brand": "Orbea",
+    "model": "road bike",
+    "price": 149,
+    "category": "Medium",
+    "store": "63beee0cda3a1b10e40741db"
 }
 
 ### READ
 
 # GET http://localhost:3000/bikes/ HTTP/1.1
 
-GET http://localhost:3000/bikes/63bd98c753c865b8d0545771 HTTP/1.1
+#GET http://localhost:3000/bikes/63beeb45da3a1b10e40741d4 HTTP/1.1
+
+GET http://localhost:3000/store/63beee0cda3a1b10e40741db/bikes HTTP/1.1
+
 
 ### UPDATE
-PUT http://localhost:3000/bikes/63bd98c753c865b8d0545771 HTTP/1.1
+PUT http://localhost:3000/updateBike/63bd98c753c865b8d0545771 HTTP/1.1
 Content-Type: application/json
 
 {
