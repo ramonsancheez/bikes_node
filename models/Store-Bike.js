@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const StoreSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    address:{
+        type: String,
+        required: true
+    },
+});
+
 const BikeSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,9 +31,16 @@ const BikeSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    store: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Store',
+        required: true,
+        onDelete: 'CASCADE'
     }
 });
 
+const Store = mongoose.model('Store', StoreSchema);
 const Bike = mongoose.model('Bike', BikeSchema);
 
-module.exports = Bike;
+module.exports = { Store, Bike };

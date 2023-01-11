@@ -7,7 +7,8 @@ Content-Type: application/json
     "brand": "BMC",
     "model": "electric bike",
     "price": 599,
-    "category": "premium"
+    "category": "premium",
+    "store": "63bed9e70c0fe97ca71a6f06"
 }
 
 ### READ
@@ -26,3 +27,21 @@ Content-Type: application/json
 
 ### DELETE
 DELETE http://localhost:3000/bikes/63bdca6faa8aa1f0c0bc5ebf HTTP/1.1
+
+
+
+
+
+
+### CREATE STORE
+POST http://localhost:3000/stores/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "BiciPalma",
+    "address": "Plaza espanya 32"
+}
+
+
+### DELETE STORE & BIKE
+DELETE http://localhost:3000/stores/63bed9e70c0fe97ca71a6f06 HTTP/1.1
