@@ -8,49 +8,35 @@ const {Store, Bike} = require('../models/Store-Bike');
     });
 
 // GET
-    router.get('/bikes', async (req, res) => {
+    async function getBikes(req, res){
         try {
             const bike = await Bike.find();  
             res.json(bike);
         } catch (err) {
             res.status(400).json(err);
         }
-    });
-    router.get('/bikes/:id', async (req, res) => {
+    }
+
+    async function filterBikesById(req, res){
         try {
             const bike = await Bike.findById(req.params.id);  
             res.json(bike);
         } catch (err) {
             res.status(400).json(err);
         }
-    });
+    }
 
-    router.get('/stores', async (req, res) => {
-        try {
-            const store = await Store.find();  
-            res.json(store);
-        } catch (err) {
-            res.status(400).json(err);
-        }
-    });
-
-    router.get('/stores/:id', async (req, res) => {
-        try {
-            const store = await Store.findById(req.params.id);  
-            res.json(store);
-        } catch (err) {
-            res.status(400).json(err);
-        }
-    });
+    async function filterBikesByStore(req, res){
+        Bike.find({store: req.params.id}).then((bikes) => {
+            res.status(200).json(bikes);
+        }).catch((err) => {
+            res.status(500).json({message: 'Error al buscar bicicletas'});
+        });  
+    }
 
 // CREATE
-    router.post('/bikes', (req, res) => {
-        const {storeId} = req.body.store;
-        
-        Store.findOne({_id:storeId}).then((store)=>{
-            if(!store) {
-                return res.status(404).json({message: "Tienda no existe"});
-            }
+    async function createBike(req, res){
+        Store.findOne({_id:req.body.store}).then((store)=>{
             const newBike = new Bike({
                 name: req.body.name,
                 brand: req.body.brand,
@@ -67,9 +53,9 @@ const {Store, Bike} = require('../models/Store-Bike');
         }).catch((err)=>{
             res.status(500).json({message: 'Error al buscar tienda'});
         });
-    });
+    }
 
-    router.post('/stores', async (req, res) => {
+    async function createStore(req, res){
         try {
             const newStore = new Store({
                 name: req.body.name,
@@ -80,10 +66,10 @@ const {Store, Bike} = require('../models/Store-Bike');
         } catch (error) {
             res.status(500).send(error);
         }
-    });
+    }
 
 // UPDATE
-    router.put('/bikes/:id', async (req, res) => {
+    async function updateBike(req, res) {
         try {
             const bike = await Bike.findByIdAndUpdate(req.params.id, {name:req.body.name}, {new: true});
             if (!bike) {
@@ -91,11 +77,11 @@ const {Store, Bike} = require('../models/Store-Bike');
             }
             res.send(bike);
         } catch (error) {
-        res.status(400).send(error);
+            res.status(400).send(error);
         }
-    });
+    }
 
-    router.put('/stores/:id', async (req, res) => {
+    async function updateStore(req, res) {
         try {
             const store = await Store.findByIdAndUpdate(req.params.id, {name:req.body.name}, {new: true});
             if (!store) {
@@ -103,21 +89,22 @@ const {Store, Bike} = require('../models/Store-Bike');
             }
             res.send(store);
         } catch (error) {
-        res.status(400).send(error);
+            res.status(400).send(error);
         }
-    }); 
+    } 
 
 // DELETE
-    router.delete('/bikes/:id', async (req, res) => {
+    async function deleteBike(req, res) {
         try {
             const deletedBike = await Bike.findByIdAndDelete(req.params.id);
             res.json(deletedBike);
         } catch (err) {
             res.status(400).json(err);
         }
-    });
 
-    router.delete('/stores/:id', (req, res) => {
+    }
+
+    async function deleteStore(req, res) {
         Bike.deleteMany({store: req.params.id}).then(()=>{
             Store.deleteOne({_id: req.params.id}).then(()=>{
                 res.status(200).json({message: 'Tienda y bicicletas asociadas eliminadas'});
@@ -127,7 +114,16 @@ const {Store, Bike} = require('../models/Store-Bike');
         }).catch((err)=>{
             res.status(500).json({message: 'Error al eliminar bicicletas'});
         });
-    });
-      
+    }      
 
-module.exports = router;
+module.exports = {
+    getBikes,
+    createStore,
+    createBike,
+    filterBikesById,
+    updateBike,
+    updateStore,
+    filterBikesByStore,
+    deleteBike,
+    deleteStore,
+}
