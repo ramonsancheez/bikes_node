@@ -52,7 +52,7 @@ Rest-Client te permite, creando un archivo .http, enviar peticiones http y ver s
 ### REST-CLIENT:
 
  - ##### **POST**:
- ![create](/imgs/createRest.png)
+ ![create](/imgs/createREST.png)
 
   - ##### **GET**:
  ![read](/imgs/readRest.png)
