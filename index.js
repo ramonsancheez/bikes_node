@@ -5,10 +5,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json())
 const controllers = require('./controllers/controllers.js')
 
-// app.use('/', controllers);
+// ENDPOINTS
 app.get('/bikes', controllers.getBikes)
 app.get('/bikes/:id', controllers.filterBikesById)
-app.get('store/:id/bikes', controllers.filterBikesByStore)
+app.get('/store/:id/bikes', controllers.filterBikesByStore)
 
 app.post('/bike', controllers.createBike)
 app.post('/store', controllers.createStore)
