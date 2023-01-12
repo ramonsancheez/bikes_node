@@ -13,7 +13,7 @@
 | Languages          | JavaScript       |
 | Framework          | Express          |
 | Base de datos      | MongoDb          |
-
+|Casos test          | SuperTest        |
 --------------
 
 ## **Metodología**
