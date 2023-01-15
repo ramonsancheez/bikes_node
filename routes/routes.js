@@ -13,6 +13,7 @@ app.post('/store', controllers.createStore)
 
 app.put('/bike/:id', controllers.updateBike)
 app.put('/store/:id', controllers.updateStore)
+app.put('/bike/:id/availability', controllers.updateAvailability)
 
 app.delete('/bike/:id', controllers.deleteBike)
 app.delete('/store/:id/bikes', controllers.deleteStore)

@@ -38,7 +38,7 @@ const {Store, Bike} = require('../models/Store-Bike');
         Bike.find({store: req.params.id, availability: true}).then((bikes) => {
             res.status(200).json(bikes);
         }).catch((err) => {
-            res.status(500).json({message: "La bicicleta con id " + req.params.id + " no se encuentra disponible en este momento"});
+            res.status(500).json({message: "Esta tienda no tiene bicicletas disponibles"});
         });
     }
 
@@ -82,11 +82,11 @@ const {Store, Bike} = require('../models/Store-Bike');
         try {
             const bike = await Bike.findByIdAndUpdate(req.params.id, {name:req.body.name}, {new: true});
             if (!bike) {
-                return res.status(404).send();
+                return res.status(404).json();
             }
-            res.send(bike);
+            res.json(bike);
         } catch (error) {
-            res.status(400).send(error);
+            res.status(400).json(error);
         }
     }
 
@@ -94,13 +94,25 @@ const {Store, Bike} = require('../models/Store-Bike');
         try {
             const store = await Store.findByIdAndUpdate(req.params.id, {name:req.body.name}, {new: true});
             if (!store) {
-                return res.status(404).send();
+                return res.status(404).json();
             }
-            res.send(store);
+            res.json(store);
         } catch (error) {
-            res.status(400).send(error);
+            res.status(400).json(error);
         }
     } 
+
+    async function updateAvailability(req, res) {
+        try {
+            const availabilityUpdated = await Bike.findByIdAndUpdate(req.params.id, {availability:req.body.availability}, {new: true});
+            if (!availabilityUpdated) {
+                return res.status(500).json({message: "No se encontró la bicicleta"});
+            }
+            res.json({message:"La bicicleta actualizada es: " + availabilityUpdated});
+        } catch (error) {
+            res.status(400).json(error);
+        }
+    }
 
 // DELETE
     async function deleteBike(req, res) {
@@ -136,6 +148,7 @@ module.exports = {
     getBikes,
     deleteAllBikes,
     createStore,
+    updateAvailability,
     createBike,
     filterBikesById,
     filterByAvailability,
