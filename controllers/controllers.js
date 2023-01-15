@@ -13,7 +13,7 @@ const {Store, Bike} = require('../models/Store-Bike');
             const bike = await Bike.find();  
             res.json(bike);
         } catch (err) {
-            res.status(400).json(err);
+            res.status(400).json({message: "No se encontró la bicileta"});
         }
     }
 
@@ -22,7 +22,7 @@ const {Store, Bike} = require('../models/Store-Bike');
             const bike = await Bike.findById(req.params.id);  
             res.json(bike);
         } catch (err) {
-            res.status(400).json(err);
+            res.status(400).json({message: "No se encontró la bicileta, compruebe que el id es correcto"});
         }
     }
 
@@ -30,8 +30,16 @@ const {Store, Bike} = require('../models/Store-Bike');
         Bike.find({store: req.params.id}).then((bikes) => {
             res.status(200).json(bikes);
         }).catch((err) => {
-            res.status(500).json({message: 'Error al buscar bicicletas'});
+            res.status(500).json({message: "Esta bicicltea no se ha encontrado en la tienda: " + req.params.id});
         });  
+    }
+
+    async function filterByAvailability(req, res){
+        Bike.find({store: req.params.id, availability: true}).then((bikes) => {
+            res.status(200).json(bikes);
+        }).catch((err) => {
+            res.status(500).json({message: "La bicicleta con id " + req.params.id + " no se encuentra disponible en este momento"});
+        });
     }
 
 // CREATE
@@ -43,15 +51,16 @@ const {Store, Bike} = require('../models/Store-Bike');
                 model: req.body.model,
                 price: req.body.price,
                 category: req.body.category,
+                availability: req.body.availability,
                 store: req.body.store
             });
             newBike.save().then(()=>{
-                res.status(201).json({message: 'Bicicleta creada'});
+                res.status(201).json({message: "Bicicleta creada: " + newBike});
             }).catch((err)=>{
-                res.status(500).json({message: 'Error al crear bicicleta'});
+                res.status(500).json({message: "Error al crear bicicleta"});
             });
         }).catch((err)=>{
-            res.status(500).json({message: 'Error al buscar tienda'});
+            res.status(500).json({message: "Error al buscar tienda"});
         });
     }
 
@@ -62,9 +71,9 @@ const {Store, Bike} = require('../models/Store-Bike');
                 address: req.body.address
             });
             await newStore.save();
-            res.status(201).send(newStore);
+            res.status(201).json({message: "La tienda se creó correctamente: " + newStore});
         } catch (error) {
-            res.status(500).send(error);
+            res.status(500).json({message: "Error al crear la tienda"});
         }
     }
 
@@ -101,7 +110,14 @@ const {Store, Bike} = require('../models/Store-Bike');
         } catch (err) {
             res.status(400).json(err);
         }
+    }
 
+    async function deleteAllBikes(req, res) {
+        Bike.deleteMany().then(() => {
+            res.status(200).json({message: "Se borraron todas las bicicletas"})
+        }).catch((err) =>{
+            res.status(500).json({message: "Error al eliminar todas las bicicletas"})
+        });
     }
 
     async function deleteStore(req, res) {
@@ -118,9 +134,11 @@ const {Store, Bike} = require('../models/Store-Bike');
 
 module.exports = {
     getBikes,
+    deleteAllBikes,
     createStore,
     createBike,
     filterBikesById,
+    filterByAvailability,
     updateBike,
     updateStore,
     filterBikesByStore,

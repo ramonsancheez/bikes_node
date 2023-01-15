@@ -32,6 +32,10 @@ const BikeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    availability: {
+        type: Boolean,
+        default: true
+    },
     store: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Store',
