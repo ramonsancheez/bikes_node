@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Bike = require('../models/bike.model.js.js');
-const Store = require('../models/store.model.js');
+const bikeRepository = require('../repositories/bikeRepository.js');
+const storeRepository = require('../repositories/storeRepository.js');
 
 // WELCOME
     router.get('/', async (req, res) => {
@@ -11,7 +11,7 @@ const Store = require('../models/store.model.js');
 // GET
     async function getBikes(req, res){
         try {
-            const bike = await Bike.find();  
+            const bike = await bikeRepository.getBikes();  
             res.json(bike);
         } catch (err) {
             res.status(400).json({message: "No se encontró la bicileta"});
@@ -20,7 +20,7 @@ const Store = require('../models/store.model.js');
 
     async function filterBikesById(req, res){
         try {
-            const bike = await Bike.findById(req.params.id);  
+            const bike = await bikeRepository.getBikeById(req.params.id);  
             res.json(bike);
         } catch (err) {
             res.status(400).json({message: "No se encontró la bicileta, compruebe que el id es correcto"});
@@ -28,7 +28,7 @@ const Store = require('../models/store.model.js');
     }
 
     async function filterBikesByStore(req, res){
-        Bike.find({store: req.params.id}).then((bikes) => {
+        bikeRepository.getBikesByStore({store: req.params.id}).then((bikes) => {
             res.status(200).json(bikes);
         }).catch((err) => {
             res.status(500).json({message: "Esta bicicltea no se ha encontrado en la tienda: " + req.params.id});
@@ -37,24 +37,13 @@ const Store = require('../models/store.model.js');
 
 // CREATE
     async function createBike(req, res){
-        Store.findOne({_id:req.body.store}).then((store)=>{
-            const newBike = new Bike({
-                name: req.body.name,
-                brand: req.body.brand,
-                model: req.body.model,
-                price: req.body.price,
-                category: req.body.category,
-                availability: req.body.availability,
-                store: req.body.store
-            });
-            newBike.save().then(()=>{
-                res.status(201).json({message: "Bicicleta creada: " + newBike});
-            }).catch((err)=>{
-                res.status(500).json({message: "Error al crear bicicleta"});
-            });
-        }).catch((err)=>{
-            res.status(500).json({message: "Error al buscar tienda"});
-        });
+        let store = storeRepository.getStoreById({_id:req.body.store});
+        if(!store) {
+            return res.status(404).json({message: "No se encontró la tienda"});
+        } else {
+            const newBike = bikeRepository.createBike(req.body);
+            res.json(newBike);
+        }
     }
 
 // UPDATE
