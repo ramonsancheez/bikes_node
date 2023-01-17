@@ -27,57 +27,43 @@ const storeRepository = require('../repositories/storeRepository.js');
         }
     }
 
-    async function filterBikesByStore(req, res){
-        bikeRepository.getBikesByStore({store: req.params.id}).then((bikes) => {
-            res.status(200).json(bikes);
-        }).catch((err) => {
-            res.status(500).json({message: "Esta bicicltea no se ha encontrado en la tienda: " + req.params.id});
-        });  
-    }
-
 // CREATE
-    async function createBike(req, res){
-        let store = storeRepository.getStoreById({_id:req.body.store});
-        if(!store) {
-            return res.status(404).json({message: "No se encontró la tienda"});
-        } else {
-            const newBike = bikeRepository.createBike(req.body);
-            res.json(newBike);
+    async function createBike(req, res) {
+        try {
+            const store = await storeRepository.getStoreById(req.body.store);
+            if (!store) {
+                return res.status(404).json({message: "No se encontró la tienda"});
+            }
+            const bike = await bikeRepository.createBike(req.body);
+            res.json(bike);
+        } catch (err) {
+            res.status(400).json({message: "La bicicleta no se pudo crear", err});
         }
     }
 
 // UPDATE
-    async function updateBike(req, res) {
+    async function updateBikeAvailability(req, res) {
         try {
-            const bike = await Bike.findByIdAndUpdate(req.params.id, {name:req.body.name}, {new: true});
-            if (!bike) {
-                return res.status(404).json();
-            }
-            res.json(bike);
-        } catch (error) {
-            res.status(400).json(error);
-        }
-    } 
-
-    async function updateAvailability(req, res) {
-        try {
-            const availabilityUpdated = await Bike.findByIdAndUpdate(req.params.id, {availability:req.body.availability}, {new: true});
+            const availabilityUpdated = await bikeRepository.updateAvailability(req.params.id, req.body.availability);
             if (!availabilityUpdated) {
-                return res.status(500).json({message: "No se encontró la bicicleta"});
+                return res.json({message: "No se encontró la bicicleta"});
             }
             res.json({message:"La bicicleta actualizada es: " + availabilityUpdated});
         } catch (error) {
-            res.status(400).json(error);
+            res.status(400).send({message});
         }
     }
 
 // DELETE
     async function deleteBike(req, res) {
         try {
-            const deletedBike = await Bike.findByIdAndDelete(req.params.id);
-            res.json(deletedBike);
+            const bike = await bikeRepository.deleteBike(req.params.id);
+            if (!bike) {
+                return res.status(404).json({message: "No se encontró la bicicleta"});
+            }
+            res.json({message: "La bicicleta se eliminó correctamente"});
         } catch (err) {
-            res.status(400).json(err);
+            res.status(400).json({message: "La bicicleta no se pudo eliminar"});
         }
     }
 
@@ -89,13 +75,24 @@ const storeRepository = require('../repositories/storeRepository.js');
         });
     }     
 
+    async function deleteAllBikes(req, res) {
+        try {
+            const bike = await bikeRepository.deleteAllBikes();
+            if (!bike) {
+                return res.status(404).json({message: "No se encontró la bicicleta"});
+            }
+            res.json({message: "La bicicleta se eliminó correctamente"});
+        } catch (err) {
+            res.status(400).json({message: "La bicicleta no se pudo eliminar"});
+        }
+    }
+    
+
 module.exports = {
     getBikes,
     deleteAllBikes,
-    updateAvailability,
+    updateBikeAvailability,
     createBike,
     filterBikesById,
-    updateBike,
-    filterBikesByStore,
     deleteBike,
 }

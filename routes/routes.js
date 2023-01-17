@@ -13,9 +13,9 @@ app.get('/store/:id/bikes/notAvailability', storeControllers.filterByNotAvailabi
 app.post('/bike', bikeControllers.createBike)
 app.post('/store', storeControllers.createStore)
 
-app.put('/bike/:id', bikeControllers.updateBike)
+// app.put('/bike/:id', bikeControllers.updateBike)
 app.put('/store/:id', storeControllers.updateStore)
-app.put('/bike/:id/availability', bikeControllers.updateAvailability)
+app.put('/bike/:id/availability', bikeControllers.updateBikeAvailability)
 
 app.delete('/bike/:id', bikeControllers.deleteBike)
 app.delete('/store/:id/bikes', storeControllers.deleteStore)

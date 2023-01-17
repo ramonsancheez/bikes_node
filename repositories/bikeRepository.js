@@ -1,30 +1,36 @@
+const express = require('express');
 const Bike = require('../models/bike.model.js.js');
-const Store = require('../models/store.model.js');
+// const Store = require('../models/store.model.js');
+const app = express();
+app.use(express.json())
 
-// all crud verbs
 async function getBikes() {
     return Bike.find();
 }
 
-async function getBikeById(id) {
+async function getBikeById(id){
     return Bike.findById(id);
 }
 
-async function getBikesByStore(id) {
-    return Bike.find({store: id});
+async function getBikesByStore(_id) {
+    return Bike.find({store: _id});
 }
 
 async function createBike(bikeBody) {
-    const bike = new Bike(bikeBody);
-    return bike.save();
+    const newBike = new Bike(bikeBody);
+    return newBike.save();
 }
 
-async function updateBike(id, bike) {
-    return Bike.findByIdAndUpdate(id, bike);
+async function updateAvailability(id, availability) {
+    return Bike.findByIdAndUpdate(id, {availability: availability}, {new: true});
 }
 
 async function deleteBike(id) {
     return Bike.findByIdAndDelete(id);
+}
+
+async function deleteAllBikes() {
+    return Bike.deleteMany();
 }
 
 
@@ -33,6 +39,7 @@ module.exports = {
     getBikeById,
     getBikesByStore,
     createBike,
-    updateBike,
+    updateAvailability,
     deleteBike,
+    deleteAllBikes,
 }
