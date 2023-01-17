@@ -1,32 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const Bike = require('../models/bike.model.js.js');
-const Store = require('../models/store.model.js');
+const bikeRepository = require('../repositories/bikeRepository.js');
+const storeRepository = require('../repositories/storeRepository.js');
 
 
 // GET
     async function filterBikesByStore(req, res){
-        Bike.find({store: req.params.id}).then((bikes) => {
-            res.status(200).json(bikes);
-        }).catch((err) => {
-            res.status(500).json({message: "Esta bicicltea no se ha encontrado en la tienda: " + req.params.id});
-        });  
+        try {
+            const bikes = await storeRepository.filterBikesByStore(req.params.id);
+            res.json({message:"Las bicicletas encontradas en la tienda fueron:",bikes});
+        } catch (err) {
+            res.json({message: "No se encontró ninguna tienda con ese id", err});
+        }  
     }
 
     async function filterByAvailability(req, res){
-        Bike.find({store: req.params.id, availability: true}).then((bikes) => {
-            res.status(200).json(bikes);
-        }).catch((err) => {
-            res.status(500).json({message: "Esta tienda no tiene bicicletas disponibles"});
-        });
+        try {
+            const bikes = await storeRepository.filterByAvailability(req.params.id);
+            res.json({message:"Las bicicletas disponibles en la tienda son:",bikes});
+        } catch (err) {
+            res.json({message: "No hay ninguna bicicleta disponible en la tienda", err});
+        }
     }
 
     async function filterByNotAvailability(req, res){
-        Bike.find({store: req.params.id, availability: false}).then((bikes) => {
-            res.status(200).json(bikes);
-        }).catch((err) => {
-            res.status(500).json({message: "Esta tienda no tiene bicicletas en uso"});
-        });
+        try {
+            const bikes = await storeRepository.filterByNotAvailability(req.params.id);
+            res.json({message:"Las bicicletas ocupadas en la tienda son:",bikes});
+        } catch (err) {
+            res.json({message: "No hay ninguna bicicleta disponible en la tienda", err});
+        }
     }
 
 // CREATE
