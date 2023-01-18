@@ -1,8 +1,4 @@
-const express = require('express');
 const Bike = require('../models/bike.model.js.js');
-// const Store = require('../models/store.model.js');
-const app = express();
-app.use(express.json())
 
 async function getBikes() {
     return Bike.find();

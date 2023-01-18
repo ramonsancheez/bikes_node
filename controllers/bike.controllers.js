@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const bikeRepository = require('../repositories/bikeRepository.js');
-const storeRepository = require('../repositories/storeRepository.js');
+const bikeRepository = require('../repositories/bike.repository.js');
+const storeRepository = require('../repositories/store.repository.js');
 
 // WELCOME
     router.get('/', async (req, res) => {
@@ -35,7 +35,7 @@ const storeRepository = require('../repositories/storeRepository.js');
                 return res.status(404).json({message: "No se encontró la tienda"});
             }
             const bike = await bikeRepository.createBike(req.body);
-            res.json(bike);
+            res.json({message: "Se creó la bicicleta:",bike});
         } catch (err) {
             res.status(400).json({message: "La bicicleta no se pudo crear", err});
         }
