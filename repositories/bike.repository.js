@@ -1,4 +1,4 @@
-const Bike = require('../models/bike.model.js.js');
+const Bike = require('../models/bike.model.js');
 
 async function getBikes() {
     return Bike.find();

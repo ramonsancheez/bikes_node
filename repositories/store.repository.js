@@ -1,4 +1,4 @@
-const Bike = require('../models/bike.model.js.js');
+const Bike = require('../models/bike.model.js');
 const Store = require('../models/store.model.js');
 
 async function getStoreById(_id){
