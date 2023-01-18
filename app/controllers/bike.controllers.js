@@ -67,7 +67,6 @@ const storeRepository = require('../repositories/store.repository.js');
         }
     }
 
-// deleteAllBikes
     async function deleteAllBikes(req, res) {
         try {
             const bike = await bikeRepository.deleteAllBikes();

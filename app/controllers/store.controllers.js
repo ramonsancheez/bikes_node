@@ -2,7 +2,7 @@ require('express');
 const storeRepository = require('../repositories/store.repository.js');
 
 // GET
-    async function filterBikesByStore(req, res){
+    async function getBikesByStore(req, res){
         try {
             const bikes = await storeRepository.filterBikesByStore(req.params.id);
             res.json({message:"Las bicicletas encontradas en la tienda fueron:",bikes});
@@ -11,7 +11,7 @@ const storeRepository = require('../repositories/store.repository.js');
         }  
     }
 
-    async function filterByAvailability(req, res){
+    async function getByAvailability(req, res){
         const availableBikes = await storeRepository.filterByAvailability(req.params.id);
         if(availableBikes.length == 0){
             return res.json({message: "No se encontró ninguna bicicleta disponible"});
@@ -20,10 +20,10 @@ const storeRepository = require('../repositories/store.repository.js');
         }
     }
 
-    async function filterByNotAvailability(req, res){
+    async function getByNotAvailability(req, res){
         const notAvailableBikes = await storeRepository.filterByNotAvailability(req.params.id);
         if(notAvailableBikes.length == 0){
-            return res.json({message: "Todas las bicicletas están disponibles"});
+            return res.json({message: "No hay bicicletas ocupadas ahora mismo"});
         } else {
             res.json({message:"Las bicicletas ocupadas de la tienda son:",notAvailableBikes});
         }
@@ -51,8 +51,8 @@ const storeRepository = require('../repositories/store.repository.js');
 
 module.exports = {
     createStore,
-    filterBikesByStore,
+    getBikesByStore,
     deleteStore,
-    filterByAvailability,
-    filterByNotAvailability,
+    getByAvailability,
+    getByNotAvailability,
 }

@@ -5,27 +5,23 @@ async function getStoreById(_id){
     return Store.findById(_id);
 }
 
-//filterBikesByStore
-async function filterBikesByStore(_id) {
+async function getBikesByStore(_id) {
     return Bike.find({store: _id});
 }
 
-//filterByAvailability
-async function filterByAvailability(_id) {
+async function getByAvailability(_id) {
     return Bike.find({store: _id, availability: true});
 }
 
-async function filterByNotAvailability(_id) {
+async function getByNotAvailability(_id) {
     return Bike.find({store: _id, availability: false});
 }
 
-//createStore
 async function createStore(bikeBody) {
     const newStore = new Store(bikeBody);
     return newStore.save();
 }
 
-// delete store and bikes associated repository
 async function deleteStore(_id) {
     const store = await Store.findByIdAndDelete(_id);
     await Bike.deleteMany({store: _id});
@@ -36,8 +32,8 @@ async function deleteStore(_id) {
 module.exports = {
     createStore,
     getStoreById,
-    filterBikesByStore,
-    filterByAvailability,
-    filterByNotAvailability,
+    getBikesByStore,
+    getByAvailability,
+    getByNotAvailability,
     deleteStore,
 }
