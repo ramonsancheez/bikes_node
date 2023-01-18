@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-const bikeRoutes = require('./routes/bike.routes.js');
-const storeRoutes = require('./routes/store.routes.js');
+const bikeRoutes = require('../routes/bike.routes.js');
+const storeRoutes = require('../routes/store.routes.js');
 app.use(express.json())
 
-require('./config/db.connection.js');
+require('../db/db.connection.js');
 app.use('/', bikeRoutes)
 app.use('/store', storeRoutes)
 

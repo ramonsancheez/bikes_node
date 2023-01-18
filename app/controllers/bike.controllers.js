@@ -67,23 +67,16 @@ const storeRepository = require('../repositories/store.repository.js');
         }
     }
 
-    async function deleteAllBikes(req, res) {
-        Bike.deleteMany().then(() => {
-            res.status(200).json({message: "Se borraron todas las bicicletas"})
-        }).catch((err) =>{
-            res.status(500).json({message: "Error al eliminar todas las bicicletas"})
-        });
-    }     
-
+// deleteAllBikes
     async function deleteAllBikes(req, res) {
         try {
             const bike = await bikeRepository.deleteAllBikes();
             if (!bike) {
-                return res.status(404).json({message: "No se encontró la bicicleta"});
+                return res.json({message: "No se pudo vaciar la base de datos"});
             }
-            res.json({message: "La bicicleta se eliminó correctamente"});
+            res.json({message: "Se eliminaron todas las bicicletas de la base de datos"});
         } catch (err) {
-            res.status(400).json({message: "La bicicleta no se pudo eliminar"});
+            res.json({message: "Hubo un error al intentar borrar todas las bicicletas de la base de datos"});
         }
     }
     

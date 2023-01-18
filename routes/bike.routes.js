@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const bikeControllers = require('../controllers/bike.controllers.js')
+const bikeControllers = require('../app/controllers/bike.controllers.js')
 
 // ENDPOINTS (BIKE)
     app.get('/bikes', bikeControllers.getBikes)
