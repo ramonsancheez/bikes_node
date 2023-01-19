@@ -3,14 +3,14 @@ const app = express();
 const bikeControllers = require('../app/controllers/bike.controllers.js')
 
 // ENDPOINTS (BIKE)
-    app.get('/bikes', bikeControllers.getBikes)
-    app.get('/bikes/:id', bikeControllers.filterBikesById)
+    app.get('/', bikeControllers.getBikes)
+    app.get('/:id', bikeControllers.filterBikesById)
 
-    app.post('/bike', bikeControllers.createBike)
+    app.post('/', bikeControllers.createBike)
 
-    app.put('/bike/:id/availability', bikeControllers.updateBikeAvailability)
+    app.put('/:id/availability', bikeControllers.updateBikeAvailability)
 
-    app.delete('/bike/:id', bikeControllers.deleteBike)
-    app.delete('/bikes', bikeControllers.deleteAllBikes)
+    app.delete('/:id', bikeControllers.deleteBike)
+    app.delete('/', bikeControllers.deleteAllBikes)
 
 module.exports = app
