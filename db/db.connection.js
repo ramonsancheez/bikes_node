@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 const db_connection = mongoose.connection;
 
-mongoose.connect('mongodb+srv://ramonsancheez:Rjq0cz5WeXXmCGKZ@cluster0.9rfuhuh.mongodb.net/bikestore?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGO_URI);
 
 db_connection.on('error', console.error.bind(console, 'connection error:'));
 
