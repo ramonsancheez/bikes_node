@@ -17,11 +17,6 @@ async function createBike(bikeBody) {
     return newBike.save();
 }
 
-async function updateBikeAvailability(id) {
-    const bike = await getBikeById(id);
-    return Bike.findByIdAndUpdate(id, {availability: !bike.availability}, {new: true});
-}
-
 async function deleteBike(id) {
     return Bike.findByIdAndDelete(id);
 }
@@ -36,7 +31,6 @@ module.exports = {
     getBikeById,
     getBikesByStore,
     createBike,
-    updateBikeAvailability,
     deleteBike,
     deleteAllBikes,
 }

@@ -1,12 +1,5 @@
-const express = require('express');
-const router = express.Router();
 const bikeRepository = require('../repositories/bike.repository.js');
 const storeRepository = require('../repositories/store.repository.js');
-
-// WELCOME
-    router.get('/', async (req, res) => {
-        res.json('Bienvendio a la tienda de bicis!');
-    });
 
 // GET
     async function getBikes(req, res){
@@ -18,7 +11,7 @@ const storeRepository = require('../repositories/store.repository.js');
         }
     }
 
-    async function filterBikesById(req, res){
+    async function getBikesById(req, res){
         try {
             const bike = await bikeRepository.getBikeById(req.params.id);  
             res.json(bike);
@@ -39,21 +32,7 @@ const storeRepository = require('../repositories/store.repository.js');
         } catch (err) {
             res.status(400).json({message: "La bicicleta no se pudo crear", err});
         }
-    }
-
-// UPDATE updateAvailability
-    async function updateBikeAvailability(req, res) {
-        try {
-            const bike = await bikeRepository.updateBikeAvailability(req.params.id, req.body);
-            if (!bike) {
-                return res.status(404).json({message: "No se encontró la bicicleta"});
-            }
-            res.json({message: "La disponibilidad de la bicicleta se actualizó correctamente", bike});
-        } catch (err) {
-            res.status(400).json({message: "La disponibilidad de la bicicleta no se pudo actualizar"});
-        }
-    }
-    
+    }    
 
 // DELETE
     async function deleteBike(req, res) {
@@ -80,12 +59,11 @@ const storeRepository = require('../repositories/store.repository.js');
         }
     }
     
-
-module.exports = {
-    getBikes,
-    deleteAllBikes,
-    updateBikeAvailability,
-    createBike,
-    filterBikesById,
-    deleteBike,
-}
+// EXPORTS
+    module.exports = {
+        getBikes,
+        deleteAllBikes,
+        createBike,
+        getBikesById,
+        deleteBike,
+    }

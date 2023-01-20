@@ -1,6 +1,5 @@
 const Bike = require('../models/bike.model.js');
 const Store = require('../models/store.model.js');
-let isAvailable = true;
 
 async function getStoreById(_id){
     return Store.findById(_id);
@@ -8,10 +7,6 @@ async function getStoreById(_id){
 
 async function getBikesByStore(_id) {
     return Bike.find({store: _id});
-}
-
-async function getByAvailability(_id) {
-    return Bike.find({store: _id, availability: isAvailable});
 }
 
 async function createStore(bikeBody) {
@@ -27,10 +22,8 @@ async function deleteStore(_id) {
 
 
 module.exports = {
-    isAvailable,
     createStore,
     getStoreById,
     getBikesByStore,
-    getByAvailability,
     deleteStore,
 }

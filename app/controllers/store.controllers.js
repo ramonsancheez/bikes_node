@@ -1,4 +1,3 @@
-require('express');
 const storeRepository = require('../repositories/store.repository.js');
 
 // GET
@@ -9,15 +8,6 @@ const storeRepository = require('../repositories/store.repository.js');
         } catch (err) {
             res.json({message: "No se encontró ninguna tienda con ese id", err});
         }  
-    }
-
-    async function getByAvailability(req, res){
-        const availableBikes = await storeRepository.getByAvailability(req.params.id);
-        if(availableBikes.length == 0){
-            res.json({message: "No se encontró ninguna tienda con ese id"});
-        } else {
-            res.json({message: "las bicicletas con disponibilidad " + storeRepository.isAvailable + " son:", availableBikes})
-        }
     }
 
 // CREATE
@@ -40,9 +30,9 @@ const storeRepository = require('../repositories/store.repository.js');
         }
     }
 
-module.exports = {
-    createStore,
-    getBikesByStore,
-    deleteStore,
-    getByAvailability,
-}
+// EXPORTS
+    module.exports = {
+        createStore,
+        getBikesByStore,
+        deleteStore,
+    }

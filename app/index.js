@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bikeRoutes = require('../routes/bike.routes.js');
 const storeRoutes = require('../routes/store.routes.js');
+const availabilityRoutes = require('../routes/availability.routes.js');
 const loggerMiddleware  = require('./middleware/loggerMiddleware.js.js');
 require('dotenv').config();
 require('../db/db.connection.js');
@@ -12,7 +13,8 @@ require('../db/db.connection.js');
 
 // ROUTES
     app.use('/bike', bikeRoutes);
-    app.use('/store', storeRoutes)
+    app.use('/store', storeRoutes);
+    app.use('/availability', availabilityRoutes)
 
 // SERVER
     const port = process.env.PORT;
