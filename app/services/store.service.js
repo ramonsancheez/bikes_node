@@ -1,5 +1,5 @@
-const serviceServices = require('../repositories/store.repository.js');
+const storeRepository = require('../repositories/store.repository.js');
 
 module.exports = {
-    serviceServices,
+    storeRepository,
 }

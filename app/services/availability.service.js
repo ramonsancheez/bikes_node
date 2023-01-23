@@ -1,5 +1,5 @@
-const availabilityServices = require('../repositories/availability.respository.js');
+const availabilityRepository = require('../repositories/availability.respository.js');
 
 module.exports = {
-    availabilityServices,
+    availabilityRepository,
 }

@@ -32,7 +32,7 @@ const BikeSchema = new mongoose.Schema({
         required: true,
         onDelete: 'CASCADE'
     }
-});
+}, { versionKey: false });
 
 const Bike = mongoose.model('Bike', BikeSchema);
 

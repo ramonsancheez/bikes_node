@@ -9,7 +9,7 @@ const StoreSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-});
+}, { versionKey: false });
 
 const Store = mongoose.model('Store', StoreSchema);
 

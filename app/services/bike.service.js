@@ -1,5 +1,5 @@
-const bikeServices = require('../repositories/bike.repository.js');
+const bikeRepository = require('../repositories/bike.repository.js');
 
 module.exports = {
-    bikeServices,
+    bikeRepository,
 }

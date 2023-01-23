@@ -1,5 +1,5 @@
 const Bike = require('../models/bike.model.js');
-const bikeRepository = require('../services/bike.service.js');
+const bikeRepository = require('../repositories/bike.repository.js');
 
 let isAvailable = true;
 
