@@ -1,13 +1,20 @@
 # **Proyecto NODE-EXPRESS**
 
-## **Para empezar**
+## **About**
+
+The project is about a bike finder by shops. That is, create bikes that are linked to a specific store (one to many), and you can change the availability of bikes to know which ones are rented and which ones are not. Also, it is possible to remove all bikes that are linked to the store that we want to delete. You can create bikes, shops, upgrade your values. . .
+
+
+
+-------
+## **Start**
 - Install dependencies: `npm install`
 
 - Execute project: `npm run start`
 
 -------
 
-## **Tecnologías usadas**
+## **Technologies used**
 
 | Characteristics    | Technologies     |
 | ------------------ | ---------------- |
@@ -19,7 +26,7 @@
 
 --------------
 
-## **Metodología**
+## **Methodology**
 For this project I have used the incremental methodology, which tries to write the code progressively. I've always worked on the **main** branch, and I was making commits as I solved user stories. Other user stories include:
 
 - Connect to the database.
@@ -31,13 +38,13 @@ For this project I have used the incremental methodology, which tries to write t
 
 ----------
 
-## **Postman y REST-Client**
-I use both [postman](https://www. postman. com/downloads/) and **rest-client** to test and develop each endpoint.
+## **Postman and REST-Client**
+I use both [postman](https://www.postman.com/downloads/) and **rest-client** to test and develop each endpoint.
 
 Rest-Client allows you, by creating a . http file, to send http requests and view their result. In my case it is the file: *requests. http*.
 
 
-### Postman:
+### POSTMAN:
 
  - ##### **POST**:
  ![create](/storage/imgs/createPostman.png)
@@ -68,11 +75,11 @@ Rest-Client allows you, by creating a . http file, to send http requests and vie
 
 --------------
 
-## **Estructura de directorios**
+## **Directory structure**
  ![estructuraDirectorios](/storage/imgs/estructuraDirectorios.png)
 
 
-## **Caso de Uso**
+## **Case of Use**
 1. In the file */availability. repository. js* I create a global variable:
 ```js
 const isAvailable = true
