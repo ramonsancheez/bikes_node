@@ -1,20 +1,19 @@
-const bikeRepository = require('../repositories/bike.repository.js');
-const storeRepository = require('../repositories/store.repository.js');
+const availabilityService = require('../services/availability.service.js');
 
 // GET
     async function getByAvailability(req, res){
-        const availableBikes = await storeRepository.getByAvailability(req.params.id);
+        const availableBikes = await availabilityService.getByAvailability(req.params.id);
         if(availableBikes.length == 0){
             res.json({message: "No se encontró ninguna tienda con ese id"});
         } else {
-            res.json({message: "las bicicletas con disponibilidad " + storeRepository.isAvailable + " son:", availableBikes})
+            res.json({message: "las bicicletas con disponibilidad " + availabilityService.isAvailable + " son:", availableBikes})
         }
     }
 
 // UPDATE
     async function updateBikeAvailability(req, res) {
         try {
-            const bike = await bikeRepository.updateBikeAvailability(req.params.id, req.body);
+            const bike = await availabilityService.updateBikeAvailability(req.params.id, req.body);
             if (!bike) {
                 return res.status(404).json({message: "No se encontró la bicicleta"});
             }

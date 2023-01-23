@@ -1,9 +1,9 @@
-const storeRepository = require('../repositories/store.repository.js');
+const storeService = require('../services/store.service.js');
 
 // GET
     async function getBikesByStore(req, res){
         try {
-            const bikes = await storeRepository.getBikesByStore(req.params.id);
+            const bikes = await storeService.getBikesByStore(req.params.id);
             res.json({message:"Las bicicletas encontradas en la tienda fueron:",bikes});
         } catch (err) {
             res.json({message: "No se encontró ninguna tienda con ese id", err});
@@ -13,7 +13,7 @@ const storeRepository = require('../repositories/store.repository.js');
 // CREATE
     async function createStore(req, res) {
         try{
-            const store = await storeRepository.createStore(req.body);
+            const store = await storeService.createStore(req.body);
             res.json({message: "Se creó la tienda:",store});
         } catch (err) {
             res.status(400).json({message: "La tienda no se pudo crear", err});
@@ -23,7 +23,7 @@ const storeRepository = require('../repositories/store.repository.js');
 // DELETE
     async function deleteStore(req, res) {
         try {
-            const store = await storeRepository.deleteStore(req.params.id);
+            const store = await storeService.deleteStore(req.params.id);
             res.json({message: "Se eliminaron todas las bicicletas relacionadas con la tienda", store});
         } catch (err) {
             res.json({message: "No se encontró la tienda", err});

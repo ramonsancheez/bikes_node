@@ -1,8 +1,10 @@
 const Bike = require('../models/bike.model.js');
+const bikeRepository = require('../services/bike.service.js');
+
 let isAvailable = true;
 
 async function updateBikeAvailability(id) {
-    const bike = await getBikeById(id);
+    const bike = await bikeRepository.getBikeById(id);
     return Bike.findByIdAndUpdate(id, {availability: !bike.availability}, {new: true});
 }
 

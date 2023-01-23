@@ -1,10 +1,10 @@
-const bikeRepository = require('../repositories/bike.repository.js');
-const storeRepository = require('../repositories/store.repository.js');
+const bikeService = require('../services/bike.service.js');
+const storeService = require('../services/store.service.js');
 
 // GET
     async function getBikes(req, res){
         try {
-            const bike = await bikeRepository.getBikes();  
+            const bike = await bikeService.getBikes();  
             res.json(bike);
         } catch (err) {
             res.status(400).json({message: "No se encontró la bicileta"});
@@ -13,7 +13,7 @@ const storeRepository = require('../repositories/store.repository.js');
 
     async function getBikesById(req, res){
         try {
-            const bike = await bikeRepository.getBikeById(req.params.id);  
+            const bike = await bikeService.getBikeById(req.params.id);  
             res.json(bike);
         } catch (err) {
             res.status(400).json({message: "No se encontró la bicileta, compruebe que el id es correcto"});
@@ -23,11 +23,11 @@ const storeRepository = require('../repositories/store.repository.js');
 // CREATE
     async function createBike(req, res) {
         try {
-            const store = await storeRepository.getStoreById(req.body.store);
+            const store = await storeService.getStoreById(req.body.store);
             if (!store) {
                 return res.status(404).json({message: "No se encontró la tienda"});
             }
-            const bike = await bikeRepository.createBike(req.body);
+            const bike = await bikeService.createBike(req.body);
             res.json({message: "Se creó la bicicleta:",bike});
         } catch (err) {
             res.status(400).json({message: "La bicicleta no se pudo crear", err});
@@ -37,7 +37,7 @@ const storeRepository = require('../repositories/store.repository.js');
 // DELETE
     async function deleteBike(req, res) {
         try {
-            const bike = await bikeRepository.deleteBike(req.params.id);
+            const bike = await bikeService.deleteBike(req.params.id);
             if (!bike) {
                 return res.status(404).json({message: "No se encontró la bicicleta"});
             }
@@ -49,7 +49,7 @@ const storeRepository = require('../repositories/store.repository.js');
 
     async function deleteAllBikes(req, res) {
         try {
-            const bike = await bikeRepository.deleteAllBikes();
+            const bike = await bikeService.deleteAllBikes();
             if (!bike) {
                 return res.json({message: "No se pudo vaciar la base de datos"});
             }
