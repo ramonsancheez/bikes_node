@@ -23,7 +23,7 @@ const storeService = require('../services/store.service.js');
 // DELETE
     async function deleteStore(req, res) {
         try {
-            const store = await storeService.deleteStore(req.params.id);
+            const store = await storeService.storeRepository.deleteStore(req.params.id);
             res.json({message: "Se eliminaron todas las bicicletas relacionadas con la tienda", store});
         } catch (err) {
             res.json({message: "No se encontró la tienda", err});
