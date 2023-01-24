@@ -3,7 +3,7 @@ const app = express();
 const bikeRoutes = require('../routes/bike.routes.js');
 const storeRoutes = require('../routes/store.routes.js');
 const availabilityRoutes = require('../routes/availability.routes.js');
-const loggerMiddleware  = require('./middleware/loggerMiddleware.js.js');
+const loggerMiddleware  = require('./middleware/loggerMiddleware.js');
 require('dotenv').config();
 require('../db/db.connection.js');
 
