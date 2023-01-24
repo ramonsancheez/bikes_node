@@ -106,4 +106,4 @@ if (condición){
 }
 ```
 
-3. And the **. length** function in the */availability.controllers.js* controller.
+3. The **. length** function in the */availability.controllers.js* controller and the **arrow function ( *=>{}* )**, that's used in the middleware */loggerMiddleware.js*
