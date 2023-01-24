@@ -20,9 +20,9 @@ The project is about a bike finder by shops. That is, create bikes that are link
 | ------------------ | ---------------- |
 | Languages          | JavaScript       |
 | Framework          | Express          |
-| Base de datos      | MongoDb          |
-| Casos test         | SuperTest        |
-| Herramientas http  | PostMan - Rest Client|
+| Data base      | MongoDb          |
+| Tests              | SuperTest, Jes   |
+| HTTP Tools         | PostMan - Rest Client|
 
 --------------
 
