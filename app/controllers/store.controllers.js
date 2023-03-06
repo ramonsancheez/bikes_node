@@ -4,10 +4,19 @@ const storeService = require('../services/store.service.js');
     async function getBikesByStore(req, res){
         try {
             const bikes = await storeService.storeRepository.getBikesByStore(req.params.id);
-            res.json({message:"Las bicicletas encontradas en la tienda fueron:",bikes});
+            res.json(bikes);
         } catch (err) {
             res.json({message: "No se encontró ninguna tienda con ese id", err});
         }  
+    }
+
+    async function getStores(req, res){
+        try {
+            const stores = await storeService.storeRepository.getStores();
+            res.json(stores);
+        } catch (err) {
+            res.json({message: "No se encontró ninguna tienda", err});
+        }
     }
 
 // CREATE
@@ -33,6 +42,7 @@ const storeService = require('../services/store.service.js');
 // EXPORTS
     module.exports = {
         createStore,
+        getStores,
         getBikesByStore,
         deleteStore,
     }

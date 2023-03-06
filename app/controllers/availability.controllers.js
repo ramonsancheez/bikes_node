@@ -4,7 +4,7 @@ const availabilityService = require('../services/availability.service.js');
     async function getByAvailability(req, res){
         const availableBikes = await availabilityService.availabilityRepository.getByAvailability(req.params.id);
         if(availableBikes.length == 0){
-            res.json({message: "No se encontró ninguna tienda con ese id"});
+            res.json({message: "No disponible"});
         } else {
             res.json({message: "las bicicletas con disponibilidad " + availabilityService.availabilityRepository.isAvailable + " son:", availableBikes})
         }

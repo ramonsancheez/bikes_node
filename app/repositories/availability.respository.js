@@ -1,6 +1,6 @@
 const Bike = require('../models/bike.model.js');
 const bikeRepository = require('../repositories/bike.repository.js');
-const isAvailable = true;
+const isAvailable = false;
 
 async function updateBikeAvailability(id) {
     const bike = await bikeRepository.getBikeById(id);

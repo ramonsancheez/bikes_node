@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>COMPARADOR</title>
+    <link rel="stylesheet" type="text/css" href="./sass/estilos.css">
+  </head>
+  <body>
+    <header>
+      <h1>COMPMARATOR</h1>
+    </header>
+    <main>
+      <select class= "tiendas" id="store-select"></select>
+      <article class= "bike__article" id="bike-list">
+      </article>
+    </main>
+    <footer>
+      <h1>COMPARATOR</h1>
+    </footer>
+
+    <script src="js/getBikesbyStore.js"></script>
+    <script src="js/getStore.js"></script>
+    <script src="js/reserveBike.js"></script>
+    <script>
+      getStore();
+      getBikesbyStore().then(function (){
+        setupButtons()
+      });
+    </script>
+
+
+  </body>
+</html>

@@ -8,6 +8,7 @@ require('dotenv').config();
 require('../db/db.connection.js');
 
 // MIDDLEWARE
+    app.use(express.static('public'));
     app.use(loggerMiddleware);
     app.use(express.json());
 

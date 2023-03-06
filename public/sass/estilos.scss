@@ -1,0 +1,86 @@
+body{
+    margin: 0;
+    header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        text-align: center;
+        background-color: rgb(0, 128, 0);
+        h1{
+            margin: 0;
+            color: white;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+    }
+
+    main{
+        select{
+            display: flex;
+            width: 350px;
+            margin: 25px auto 0;
+        }
+
+        .bike{
+            &__item{
+                display: grid;
+                grid-template-columns: 400px 400px;
+                justify-content: center;
+                gap: 70px;
+                margin-top: 25px;
+
+                &:not(:first-child) {
+                    margin-top: 150px;
+                }
+
+                &:nth-of-type(odd){
+                    .bike__photo{
+                        grid-column: 1;
+                        grid-row: 1;
+                    }
+                }
+                &:nth-of-type(even){
+                    .bike__photo{
+                        grid-column: 2;
+                        grid-row: 1;
+                    }
+                }
+            }
+
+            &__title{
+                margin-top: 25px !important;
+            }
+
+            &__content{
+                ul{
+                    list-style: none;
+                    padding-left: 0;
+                    li{
+                        padding-top: 10px;
+                    }
+                }
+            }
+
+            &__photo{
+                line-height: 0;
+                box-shadow: 0 20px 30px rgb(0, 0, 0);
+            }
+        }
+
+    }
+
+    footer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        background-color: rgb(0, 0, 0);
+        gap: 70px;
+        width: 100%;
+        margin-top: 100px;
+        bottom: 0;
+        h1{
+            color: white;
+        }
+    }
+}

@@ -9,6 +9,10 @@ async function getBikesByStore(_id) {
     return Bike.find({store: _id});
 }
 
+async function getStores() {
+    return Store.find();
+}
+
 async function createStore(bikeBody) {
     const newStore = new Store(bikeBody);
     return newStore.save();
@@ -23,6 +27,7 @@ async function deleteStore(_id) {
 
 module.exports = {
     createStore,
+    getStores,
     getStoreById,
     getBikesByStore,
     deleteStore,
