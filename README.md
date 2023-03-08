@@ -106,4 +106,9 @@ if (condición){
 }
 ```
 
-3. The **. length** function in the */availability.controllers.js* controller and the **arrow function ( *=>{}* )**, that's used in the middleware */loggerMiddleware.js*
+3. The **. length** function in the */availability.controllers.js* controller.
+
+4. We also found some arrow functions throughout the code. An example would be in middleware */loggerMiddleware.js*
+```
+const loggerMiddleware = (req, res, next) => {
+```
