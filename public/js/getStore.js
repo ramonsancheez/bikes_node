@@ -1,5 +1,5 @@
 async function getStore(){
-    const storeSelect = document.getElementById('store-select');
+    const storeSelect = document.getElementById('select-id');
     await fetch('http://localhost:3000/store')
       .then(response => response.json())
       .then(stores => {
@@ -8,7 +8,7 @@ async function getStore(){
             storeSelect.classList.add('tiendas');
             const storeOption = document.createElement('option');
             storeOption.textContent = store.name;
-            storeOption.id = store._id;
+            storeOption.value = store._id;
             storeSelect.appendChild(storeOption);
         });
         })

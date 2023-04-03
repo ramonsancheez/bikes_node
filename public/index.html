@@ -10,21 +10,24 @@
       <h1>COMPMARATOR</h1>
     </header>
     <main>
-      <select class= "tiendas" id="store-select"></select>
-      <article class= "bike__article" id="bike-list">
-      </article>
+      <select class= "tiendas" id="select-id"></select>
+      <button id="fetch-button">Search</button>
+      <article class= "bike__article" id="bike-list"></article>
     </main>
     <footer>
       <h1>COMPARATOR</h1>
     </footer>
-
-    <script src="js/getBikesbyStore.js"></script>
+    
+    <script src="js/main.js"></script>
     <script src="js/getStore.js"></script>
+    <script src="js/getBikesbyStore.js"></script>
     <script src="js/reserveBike.js"></script>
     <script>
       getStore();
-      getBikesbyStore().then(function (){
-        setupButtons()
+      document.addEventListener('DOMContentLoaded', () => {
+        getBikesbyStore().then(function (){
+          setupButtons()
+        });
       });
     </script>
 
